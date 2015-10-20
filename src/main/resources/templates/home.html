@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>Crossrail:: DB2ES</title>
+</head>
+<body>
+
+<div layout:fragment="content" class="container">
+
+    <div class="row">
+        <progress class="progress" value="0" max="100" th:value="${percentage}">~</progress>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header">Database</div>
+                <div class="card-block">
+                    <h2 class="text-center source-total" th:text="${sourceTotal}">~</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header">Elastic Search</div>
+                <div class="card-block">
+                    <h2 class="text-center destination-total" th:text="${destinationTotal}">~</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var socket = new SockJS('/ws');
+        stompClient = Stomp.over(socket);
+        stompClient.connect({}, function(frame) {
+
+            // source total
+            stompClient.subscribe('/source/total', function(message){
+                var data = JSON.parse(message.body);
+                var sourceTotal = $('.source-total');
+
+                var current = sourceTotal.text();
+                sourceTotal.html(data);
+
+                if (current != data) {
+                    var other = $('.destination-total').text()
+
+                    var percentage = (data / other) * 100;
+                    $('.progress').attr('value', percentage);
+                }
+            });
+
+            // destination total
+            stompClient.subscribe('/destination/total', function(message){
+                var data = JSON.parse(message.body);
+                var destinationTotal = $('.destination-total');
+
+                var current = destinationTotal.text();
+                destinationTotal.html(data);
+
+                if (current != data) {
+                    var other = $('.source-total').text()
+
+                    var percentage = (data / other) * 100;
+                    $('.progress').attr('value', percentage);
+                }
+            });
+        });
+    </script>
+</div>
+
+</body>
+</html>

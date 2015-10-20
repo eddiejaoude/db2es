@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+    <title>Crossrail</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="../../css/bootstrap.min.css"/>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" href="../../css/styles.css"/>
+
+    <script type="text/javascript" th:src="@{/js/jquery-2.1.4.min.js}" src="../../js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}" src="../../js/bootstrap.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/sockjs.min.js}" src="../../js/sockjs.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/stomp.js}" src="../../js/stomp.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-light bg-faded">
+    <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2">
+        &#9776;
+    </button>
+    <div class="collapse navbar-toggleable-xs" id="exCollapsingNavbar2">
+        <a class="navbar-brand" href="#">Crossrail DB2ES</a>
+        <ul class="nav navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+
+    <div class="alert alert-warning" role="alert">
+        <strong>Beta!</strong> Currently in Prototype mode.
+    </div>
+
+    <div layout:fragment="content">
+        Layout
+    </div>
+</div>
+
+</body>
+</html>
