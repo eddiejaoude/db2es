@@ -1,7 +1,6 @@
 debug: true
 server:
   port: 8080
-
 spring:
   devtools:
     restart:
