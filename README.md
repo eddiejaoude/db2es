@@ -8,6 +8,4 @@
 
 * [x] Progress bar - Difference in DB & ES, Current run, realtime progress of jobs (BLUE)
 * [ ] Progress bar - Timer until next run
-* [ ]
-* [ ]
-* [ ]
+
